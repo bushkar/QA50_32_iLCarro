@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
-public class AppManager {
+public class ApplicationManager {
     private WebDriver driver;
 
     public WebDriver getDriver() {
@@ -18,7 +18,7 @@ public class AppManager {
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+//        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
     @AfterMethod(enabled = false)
