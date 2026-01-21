@@ -7,8 +7,6 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-import static java.sql.DriverManager.getDriver;
-
 public class LoginTests extends ApplicationManager {
 
     @Test
