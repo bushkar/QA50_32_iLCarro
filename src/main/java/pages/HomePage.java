@@ -15,14 +15,20 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//a[@ng-reflect-router-link='login']")
     WebElement btnLogin;
-    @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
-    WebElement btnRegistration;
+//    @FindBy(xpath = "//a[@ng-reflect-router-link='registration']")
+//    WebElement btnRegistration;
+    @FindBy(xpath = "//a[text()=' Sign up ']")
+    WebElement btnSignUp;
 
     public void clickBtnLogin() {
         btnLogin.click();
     }
 
-    public void clickBtnRegistration() {
-        btnRegistration.click();
+//    public void clickBtnRegistration() {
+//        btnRegistration.click();
+//    }
+
+    public void clickBtnSignUp() {
+        btnSignUp.click();
     }
 }
