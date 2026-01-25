@@ -33,7 +33,8 @@ public class RegistrationTests extends ApplicationManager {
 //        homePage.clickBtnRegistration();
 //        RegistrationPage registrationPage = new RegistrationPage(getDriver());
         registrationPage.typeRegistrationForm(user);
-        registrationPage.clickCheckBox();
+//        registrationPage.clickCheckBox();
+        registrationPage.clickCheckBoxWithActions();
         registrationPage.clickBtnYalla();
         Assert.assertTrue(registrationPage.isRegisteredDisplayed());
     }

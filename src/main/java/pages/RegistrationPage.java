@@ -1,6 +1,7 @@
 package pages;
 
 import dto.User;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +32,7 @@ public class RegistrationPage extends BasePage {
     //    @FindBy(xpath = "//*[@class='checkbox-container']")
     @FindBy(xpath = "//label[@for='terms-of-use']")
 //    WebElement checkboxIAgree;
-            WebElement checkBoxAgree;
+    WebElement checkBoxAgree;
     @FindBy(xpath = "//button[text()='Y’alla!']")
     WebElement btnYalla;
     @FindBy(xpath = "//h2[text()='You are logged in success']")
@@ -51,7 +52,22 @@ public class RegistrationPage extends BasePage {
     }
 
     public void clickCheckBox() {
+        checkBoxAgree.click();
+    }
 
+    public void setCheckBoxAgree(boolean value) {
+        if (checkBoxAgree.isSelected() != value)
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();",
+                            checkBoxAgree);
+    }
+
+    public void setCheckBoxAgreeTermsOfUse() {
+        if (!checkBoxAgree.isSelected()) {
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();",
+                            checkBoxAgree);
+        }
     }
 
     public void clickCheckBoxWithActions() {
@@ -60,7 +76,7 @@ public class RegistrationPage extends BasePage {
         System.out.println(x + "x" + y);
 
         Actions actions = new Actions(driver);
-        actions.moveToElement().click().perform();
+        actions.moveToElement(checkBoxAgree,-100,-5).click().perform();
     }
 
     public void clickBtnYalla() {
