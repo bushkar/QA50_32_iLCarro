@@ -32,10 +32,11 @@ public class RegistrationPage extends BasePage {
     //    @FindBy(xpath = "//*[@class='checkbox-container']")
     @FindBy(xpath = "//label[@for='terms-of-use']")
 //    WebElement checkboxIAgree;
-    WebElement checkBoxAgree;
-    @FindBy(xpath = "//button[text()='Y’alla!']")
+            WebElement checkBoxAgree;
+    //    @FindBy(xpath = "//button[text()='Y’alla!']")
+    @FindBy(css = "button[type='submit']")
     WebElement btnYalla;
-    @FindBy(xpath = "//h2[text()='You are logged in success']")
+    @FindBy(css = "//h2[text()='You are logged in success']")
     WebElement popUpSuccessfulRegistration;
 
     public void typeRegistrationForm(User user) {
@@ -76,7 +77,7 @@ public class RegistrationPage extends BasePage {
         System.out.println(x + "x" + y);
 
         Actions actions = new Actions(driver);
-        actions.moveToElement(checkBoxAgree,-100,-5).click().perform();
+        actions.moveToElement(checkBoxAgree, -x / 2, -y / 2).click().perform();
     }
 
     public void clickBtnYalla() {
