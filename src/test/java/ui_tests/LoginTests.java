@@ -10,7 +10,7 @@ import pages.LoginPage;
 import pages.PopUpPage;
 
 public class LoginTests extends ApplicationManager {
-    SoftAssert softAssert;
+    SoftAssert softAssert = new SoftAssert();
 
     @Test
     public void loginPositiveTest() {
@@ -53,7 +53,7 @@ public class LoginTests extends ApplicationManager {
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
 //        Assert.assertTrue(loginPage.isTextInErrorPresent("It'snot look like email"));
-        softAssert.assertTrue(loginPage.isTextInErrorPresent("It'snot loo like email"), "validate field email");
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("It'snot look like email"), "validate field email");
         System.out.println("wrong text!");
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "validate field password");
         System.out.println("right text!");
