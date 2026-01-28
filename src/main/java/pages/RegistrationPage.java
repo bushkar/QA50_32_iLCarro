@@ -52,6 +52,13 @@ public class RegistrationPage extends BasePage {
 //            checkboxIAgree.click();
     }
 
+    public void clearRegistrationForm() {
+        fieldFirstName.clear();
+        fieldLastName.clear();
+        fieldEmail.clear();
+        fieldPassword.clear();
+    }
+
     public void clickCheckBox() {
         checkBoxAgree.click();
     }
