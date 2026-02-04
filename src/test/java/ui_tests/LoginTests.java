@@ -8,15 +8,20 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
+import utils.RetryAnalyser;
+
+import static utils.PropertiesReader.*;
 
 public class LoginTests extends ApplicationManager {
     SoftAssert softAssert = new SoftAssert();
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyser.class)
     public void loginPositiveTest() {
         User user = User.builder()
-                .email("qa32@gmail.com")
-                .password("Password$123")
+//                .email("qa32@gmail.com")
+//                .password("Password$123")
+                .email(getProperty("base.properties", "login"))
+                .password(getProperty("base.properties", "password"))
                 .build();
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogin();
@@ -27,10 +32,11 @@ public class LoginTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Logged in success"));
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyser.class)
     public void loginNegativeTest_WrongPassword_WOSpecSymbol() {
         User user = User.builder()
-                .email("qa32@gmail.com")
+//                .email("qa32@gmail.com")
+                .email(getProperty("base.properties", "login"))
                 .password("Password123")
                 .build();
         HomePage homePage = new HomePage(getDriver());
@@ -41,7 +47,7 @@ public class LoginTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyser.class)
     public void loginNegativeTest_WrongEmail_Empty() {
         User user = User.builder()
                 .email("qa32gmail.com")
