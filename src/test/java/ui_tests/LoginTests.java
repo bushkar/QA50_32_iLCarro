@@ -48,7 +48,7 @@ public class LoginTests extends ApplicationManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyser.class)
-    public void loginNegativeTest_WrongEmail_Empty() {
+    public void loginNegativeTest_WrongPassword_Empty() {
         User user = User.builder()
                 .email("qa32gmail.com")
                 .password("")
