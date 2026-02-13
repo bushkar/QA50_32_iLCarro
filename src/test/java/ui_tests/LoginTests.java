@@ -10,19 +10,24 @@ import pages.LoginPage;
 import pages.PopUpPage;
 import utils.RetryAnalyser;
 
+import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import static utils.PropertiesReader.*;
 
 public class LoginTests extends ApplicationManager {
     SoftAssert softAssert = new SoftAssert();
 
     @Test(retryAnalyzer = RetryAnalyser.class)
-    public void loginPositiveTest() {
+    public void loginPositiveTest(Method method) {
         User user = User.builder()
 //                .email("qa32@gmail.com")
 //                .password("Password$123")
                 .email(getProperty("base.properties", "login"))
                 .password(getProperty("base.properties", "password"))
                 .build();
+        logger.info("start test" + method.getName() + " with user " + user);
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogin();
         LoginPage loginPage = new LoginPage(getDriver());
