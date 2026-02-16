@@ -11,8 +11,6 @@ import pages.PopUpPage;
 import utils.RetryAnalyser;
 
 import java.lang.reflect.Method;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import static utils.PropertiesReader.*;
 
