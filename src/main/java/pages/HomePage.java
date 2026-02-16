@@ -1,5 +1,6 @@
 package pages;
 
+import dto.Search;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,12 @@ public class HomePage extends BasePage {
     WebElement btnSignUp;
     @FindBy(xpath = "//a[contains(text(), 'Logout')]")
     WebElement btnLogOut;
+    @FindBy(id = "city")
+    WebElement fieldCity;
+    @FindBy(id = "dates")
+    WebElement fieldDates;
+    @FindBy(css = "button[type='submit']")
+    WebElement btnYalla;
 
     public void clickBtnLogin() {
         btnLogin.click();
@@ -39,4 +46,11 @@ public class HomePage extends BasePage {
     public void clickBtnLogOut() {
         btnLogOut.click();
     }
+
+    public void typeSearchForm(Search search) {
+        fieldCity.sendKeys(search.getCity());
+        fieldDates.sendKeys(search.getDates());
+        btnYalla.click();
+    }
+
 }
