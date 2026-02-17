@@ -1,12 +1,16 @@
 package pages;
 
 import dto.Search;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import utils.PropertiesReader;
+
+import java.time.LocalDate;
 
 public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
@@ -25,11 +29,16 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[contains(text(), 'Logout')]")
     WebElement btnLogOut;
     @FindBy(id = "city")
-    WebElement fieldCity;
+//    WebElement fieldCity;
+    WebElement inputCity;
     @FindBy(id = "dates")
-    WebElement fieldDates;
-    @FindBy(css = "button[type='submit']")
+//    WebElement fieldDates;
+    WebElement inputDates;
+    //    @FindBy(css = "button[type='submit']")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
+    @FindBy(xpath = "//button[@aria-label='Choose month and year']")
+    WebElement btnYearCalendar;
 
     public void clickBtnLogin() {
         btnLogin.click();
@@ -47,10 +56,53 @@ public class HomePage extends BasePage {
         btnLogOut.click();
     }
 
-    public void typeSearchForm(Search search) {
-        fieldCity.sendKeys(search.getCity());
-        fieldDates.sendKeys(search.getDates());
-        btnYalla.click();
+    //    public void typeSearchForm(Search search) {
+//        fieldCity.sendKeys(search.getCity());
+//        fieldDates.sendKeys(search.getDates());
+//        btnYalla.click();
+//    }
+    public void typeSearchForm(String city, LocalDate startDate, LocalDate endDate) {
+        inputCity.sendKeys(city);
+        String dates = startDate.getMonthValue() + "/"
+                + startDate.getDayOfMonth() + "/"
+                + startDate.getYear() + " - "
+                + endDate.getMonthValue() + "/"
+                + endDate.getDayOfMonth() + "/"
+                + endDate.getYear();
+        inputDates.sendKeys(dates);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");
+//        btnYalla.click();
+//        clickWait(btnYalla, 3);
     }
 
+    public void clickBtnYalla() {
+        clickWait(btnYalla, 3);
+    }
+
+    public void typeSearchFormWOJS(String city, LocalDate startDate, LocalDate endDate) {
+        inputCity.sendKeys(city);
+        String dates = startDate.getMonthValue() + "/"
+                + startDate.getDayOfMonth() + "/"
+                + startDate.getYear() + " - "
+                + endDate.getMonthValue() + "/"
+                + endDate.getDayOfMonth() + "/"
+                + endDate.getYear();
+        inputDates.sendKeys(dates);
+//        clickWait(btnYalla, 3);
+    }
+
+    public void typeCalendar(LocalDate date) {
+        btnYearCalendar.click();
+        String year = Integer.toString(date.getYear());
+        WebElement btnYear = driver.findElement(By.
+                xpath("//td[@aria-label='" + year + "']"));
+        btnYear.click();
+    }
+
+    public void typeSearchFormWithCalendar(String city, LocalDate startDate, LocalDate endDate) {
+        inputCity.sendKeys(city);
+        inputDates.click();
+        typeCalendar(startDate);
+    }
 }

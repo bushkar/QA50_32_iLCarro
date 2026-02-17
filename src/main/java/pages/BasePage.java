@@ -76,4 +76,19 @@ public class BasePage {
             default -> throw new RuntimeException("Invalid parameter");
         }
     }
+
+    public void clickWait(WebElement element, int time) {
+        new WebDriverWait(driver, Duration.ofSeconds(time))
+                .until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    public boolean urlContains(String partOfUrl, int time) {
+        try {
+            return new WebDriverWait(driver, Duration.ofSeconds(time))
+                    .until(ExpectedConditions.urlContains(partOfUrl));
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
