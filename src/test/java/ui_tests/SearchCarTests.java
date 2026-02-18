@@ -54,4 +54,33 @@ public class SearchCarTests extends ApplicationManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
     }
 
+    @Test
+    public void searchCarNegativeTest_DateBeforeToday() {
+        String city = "Rehovot";
+        LocalDate startDate = LocalDate.now().minusDays(1);
+        LocalDate endDate = LocalDate.now();
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.sendTabToInputCity();
+        Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date before today"));
+    }
+
+    @Test
+    public void searchCarNegativeTest_BookingLessDay() {
+        String city = "Rehovot";
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now();
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.sendTabToInputCity();
+        Assert.assertTrue(homePage.isTextInErrorPresent("You can't book car for less than a day"));
+    }
+
+    @Test
+    public void searchCarNegativeTest_StartDateAfterEndDate() {
+        String city = "Rehovot";
+        LocalDate startDate = LocalDate.now().plusDays(1);
+        LocalDate endDate = LocalDate.now();
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.sendTabToInputCity();
+        Assert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"));
+    }
 }

@@ -1,10 +1,6 @@
 package pages;
 
-import dto.Search;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -80,6 +76,10 @@ public class HomePage extends BasePage {
         clickWait(btnYalla, 3);
     }
 
+    public void sendTabToInputCity() {
+        inputCity.sendKeys(Keys.TAB);
+    }
+
     public void typeSearchFormWOJS(String city, LocalDate startDate, LocalDate endDate) {
         inputCity.sendKeys(city);
         String dates = startDate.getMonthValue() + "/"
@@ -95,9 +95,18 @@ public class HomePage extends BasePage {
     public void typeCalendar(LocalDate date) {
         btnYearCalendar.click();
         String year = Integer.toString(date.getYear());
+        StringBuilder month = new StringBuilder(date.getMonth().toString());
+        month.replace(1, month.length(), month.substring(1).toLowerCase());
+        String day = Integer.toString(date.getDayOfMonth());
         WebElement btnYear = driver.findElement(By.
                 xpath("//td[@aria-label='" + year + "']"));
         btnYear.click();
+        WebElement btnMonth = driver.findElement(By.
+                xpath("//td[@aria-label='" + month + " " + year + "']"));
+        btnMonth.click();
+        WebElement btnDay = driver.findElement(By.
+                xpath("//td[@aria-label='" + month + " " + day + ", " + year + "']"));
+        btnDay.click();
     }
 
     public void typeSearchFormWithCalendar(String city, LocalDate startDate, LocalDate endDate) {
