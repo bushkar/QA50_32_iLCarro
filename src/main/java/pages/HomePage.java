@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertiesReader;
 import utils.enums.FooterMenuItem;
+import utils.enums.Locator;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -134,5 +135,11 @@ public class HomePage extends BasePage {
         driver.findElement(By.xpath(item.getLocator())).click();
         return new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.titleContains(title));
+    }
+
+    public boolean clickLink(Locator item, String url) {
+        driver.findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.urlContains(url));
     }
 }

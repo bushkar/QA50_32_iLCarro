@@ -1,6 +1,6 @@
 package utils.enums;
 
-public enum FooterMenuItem {
+public enum FooterMenuItem implements Locator{
     ICON_FACEBOOK("//a[@href='https://www.facebook.com/']"),
     ICON_TELEGRAM("//a[@href='https://telegram.org/']"),
     ICON_VK("//a[@href='https://vk.com/']"),
