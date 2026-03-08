@@ -20,7 +20,7 @@ public class AddNewCarTests extends ApplicationManager {
     LoginPage loginPage;
     LetTheCarWorkPage letTheCarWorkPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openLetTheCarWorkPage() {
         User user = User.builder()
                 .email(getProperty("base.properties", "login"))
@@ -35,7 +35,7 @@ public class AddNewCarTests extends ApplicationManager {
         letTheCarWorkPage = homePage.clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void addNewCarPositiveTest() {
         Car car = CarFactory.positiveCar();
         letTheCarWorkPage.typeAddNewCarForm(car);

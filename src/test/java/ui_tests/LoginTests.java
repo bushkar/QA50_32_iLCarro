@@ -17,7 +17,7 @@ import static utils.PropertiesReader.*;
 public class LoginTests extends ApplicationManager {
     SoftAssert softAssert = new SoftAssert();
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = {"smoke", "user"}, retryAnalyzer = RetryAnalyser.class)
     public void loginPositiveTest(Method method) {
         User user = User.builder()
 //                .email("qa32@gmail.com")
@@ -35,7 +35,7 @@ public class LoginTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Logged in success"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = "user", retryAnalyzer = RetryAnalyser.class)
     public void loginNegativeTest_WrongPassword_WOSpecSymbol() {
         User user = User.builder()
 //                .email("qa32@gmail.com")
@@ -50,7 +50,7 @@ public class LoginTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = "user", retryAnalyzer = RetryAnalyser.class)
     public void loginNegativeTest_WrongPassword_Empty() {
         User user = User.builder()
                 .email("qa32gmail.com")

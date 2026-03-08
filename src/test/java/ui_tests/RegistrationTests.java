@@ -19,7 +19,7 @@ public class RegistrationTests extends ApplicationManager {
     RegistrationPage registrationPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage() {
         new HomePage(getDriver()).clickBtnSignUp();
         registrationPage = new RegistrationPage(getDriver());
@@ -46,7 +46,7 @@ public class RegistrationTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = {"smoke", "user"}, retryAnalyzer = RetryAnalyser.class)
     public void registrationPositiveTest_WithFaker() {
         User user = positiveUser();
         registrationPage.typeRegistrationForm(user);
@@ -55,7 +55,7 @@ public class RegistrationTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = "user", retryAnalyzer = RetryAnalyser.class)
     public void registrationNegativeTest_WrongFirstName_Empty_WrongEmail_AlreadyExists_WithFaker() {
         PopUpPage popUpPage = new PopUpPage(getDriver());
 
@@ -90,7 +90,7 @@ public class RegistrationTests extends ApplicationManager {
         softAssert.assertAll();
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = "user", retryAnalyzer = RetryAnalyser.class)
     public void registrationNegativeTest_UserAlreadyExists() {
         User user = User.builder()
                 .firstName("ftrue")
@@ -104,7 +104,7 @@ public class RegistrationTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("User already exists"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = "user", retryAnalyzer = RetryAnalyser.class)
     public void registrationNegativeTest_WithSpaceInFirstName() {
         User user = User.builder()
                 .firstName(" ")
@@ -118,7 +118,7 @@ public class RegistrationTests extends ApplicationManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("must not be blank"));
     }
 
-    @Test(retryAnalyzer = RetryAnalyser.class)
+    @Test(groups = "user", retryAnalyzer = RetryAnalyser.class)
     public void registrationNegativeTest_WithAllEmptyFields() {
         User user = User.builder()
                 .firstName("")
